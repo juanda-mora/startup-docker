@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Sesión</title>
+  <link rel="stylesheet" th:href="@{/css/editar.css}">
+</head>
+<body>
+
+<header>
+  <a th:href="@{/administrador}" style="text-decoration: none; color: inherit; display: inline-block;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+      <strong>LEVIATAN'S STARTUPS</strong>
+    </div>
+  </a>
+
+  <nav>
+    <a th:href="@{/administrador}">Home</a>
+    <a th:href="@{/admin/perfil}">Perfil</a>
+    <a th:href="@{/sesion}">Sesiones</a>
+    <a th:href="@{/administrador/convocatoria}">Convocatorias</a>
+    <a th:href="@{/startup}">Startups</a>
+    <a th:href="@{/postulacion}">Postulaciones</a>
+  </nav>
+  <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<div class="crear-container">
+  <div class="crear-info">
+    <h3>Editar Sesión</h3>
+
+    <img id="preview" th:src="${sesion.imagen}" alt="Imagen actual" />
+
+    <p>Selecciona una nueva imagen si deseas reemplazarla</p>
+
+    <form class="form-crear"
+          th:action="@{/editarSesion/{id}(id=${sesion.id})}"
+          th:object="${sesion}"
+          method="post"
+          enctype="multipart/form-data">
+
+      <label for="titulo">Título</label>
+      <input type="text" th:field="*{titulo}" id="titulo" required />
+
+      <label for="notas">Notas</label>
+      <textarea th:field="*{notas}" id="notas" required></textarea>
+
+      <label for="usuarioId">Usuario</label>
+      <select name="usuarioId" id="usuarioId" required>
+        <option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nombre}" th:selected="${u.id == sesion.usuario.id}"></option>
+      </select>
+
+      <label for="startupId">Startup</label>
+      <select name="startupId" id="startupId" required>
+        <option th:each="s : ${startups}" th:value="${s.id}" th:text="${s.nombre}" th:selected="${s.id == sesion.startup.id}"></option>
+      </select>
+
+      <label for="reservada">¿Reservada?</label>
+      <input type="checkbox" th:field="*{reservada}" id="reservada" />
+
+      <label for="imagenFile">Nueva imagen (opcional)</label>
+      <input type="file" name="imagenFile" id="imagenFile" accept=".jpg,.jpeg,.png" />
+
+      <button type="submit" class="btn-editar">Guardar cambios</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const inputImagen = document.getElementById("imagenFile");
+  const preview = document.getElementById("preview");
+
+  inputImagen.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+
+</body>
+</html>

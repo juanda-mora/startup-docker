@@ -1,0 +1,157 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* === HEADER Y NAVEGACIÓN === */
+header {
+    background-color: #003C43;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header a div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header a div img {
+    width: 35px;
+    height: 35px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+    color: #77B0AA;
+    transform: scale(1.1);
+}
+
+.logout-btn {
+    background-color: white;
+    color: #003C43;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 2px solid #003C43;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #f87171;
+    color: white;
+}
+
+/* === BANNER === */
+.banner-convocatoria {
+    text-align: center;
+    background-color: #003C3C;
+    padding: 40px 20px;
+}
+
+.banner-convocatoria h1 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.banner-convocatoria p {
+    color: #e0f7f6;
+    font-size: 16px;
+}
+
+/* === CONVOCATORIAS === */
+.convocatorias {
+    padding: 30px;
+    text-align: center;
+}
+
+.panel-convocatoria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.card-convocatoria {
+    background: #ffffff;
+    padding: 25px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    transition: transform 0.3s ease;
+    text-align: left;
+}
+
+.card-convocatoria:hover {
+    transform: translateY(-5px);
+}
+
+.titulo-sesion {
+    color: #003C43;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0f7f6;
+    padding-bottom: 10px;
+}
+
+.info-sesion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.info-item {
+    display: grid;
+    grid-template-columns: 20px auto 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-item i {
+    color: #007B7F;
+    font-size: 16px;
+}
+
+.label {
+    font-weight: bold;
+    color: #003C43;
+}
+
+.value {
+    color: #333;
+    word-break: break-word;
+}
+
+.img-sesion {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    max-height: 250px;
+    background-color: #f0f0f0;
+}

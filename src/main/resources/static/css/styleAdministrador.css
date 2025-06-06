@@ -1,0 +1,409 @@
+/* === RESET === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* === BODY === */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #E3FEF7; /* muy claro */
+    color: #003C43; /* color principal */
+    line-height: 1.5;
+}
+
+/* === HEADER Y NAVEGACIÓN === */
+header {
+    background-color: #003C43;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo en header */
+header a div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header a div img {
+    width: 35px;
+    height: 35px;
+}
+
+
+
+/* Navegación */
+nav {
+    background: #003C43; /* mismo que header para consistencia */
+    color: white;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Links navegación */
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+    color: #77B0AA; /* color claro de la paleta */
+    transform: scale(1.1);
+}
+
+/* Botón cerrar sesión */
+.logout-btn {
+    background-color: white;
+    color: #003C43;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 2px solid #003C43;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #f87171; /* rojo para alerta */
+    color: white;
+}
+
+/* === SECCIÓN DE BIENVENIDA === */
+.welcome {
+    background-color: #003C43;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 20px; /* Reducido */
+    margin: 10px auto; /* Menos separación */
+    max-width: 800px; /* Un poco más compacto */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 60, 67, 0.1);
+}
+
+.welcome h2 {
+    font-size: 1.6rem; /* Opcional: tamaño moderado */
+    margin-bottom: 5px;
+}
+
+.welcome p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+
+
+/* === PERFIL (PERFILADMINISTRADOR.HTML) === */
+.perfil-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    flex-wrap: wrap;
+    padding: 40px;
+    background-color: #E3FEF7; /* mantener coherencia */
+}
+
+.perfil-info {
+    text-align: center;
+    max-width: 300px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 25px 20px;
+    box-shadow: 0 4px 10px rgba(0, 60, 67, 0.15);
+    border: 2px solid #135D66;
+}
+
+.perfil-info img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #003C43;
+    margin-bottom: 15px;
+}
+
+.perfil-info h3 {
+    font-size: 22px;
+    color: #003C43;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.perfil-info h4 {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #135D66;
+}
+
+.perfil-info p {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
+
+.perfil-info small {
+    color: #77B0AA;
+    font-weight: 600;
+}
+
+.perfil-info a.btn-editar-perfil {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 18px;
+    background-color: #003C43;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.perfil-info a.btn-editar-perfil:hover {
+    background-color: #135D66;
+}
+
+/* === BANNER (INICIO ADMINISTRADOR) === */
+.banner {
+    background-color: #4f9e95;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.banner img {
+    width: 90px;
+    height: 90px;
+}
+
+.banner h2 {
+    font-size: 28px;
+    margin-top: 20px;
+}
+
+.banner p {
+    max-width: 600px;
+    margin: 15px auto;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.banner a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 18px;
+    background-color: #001F1F; /* más oscuro */
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.banner a:hover {
+    background-color: #004141; /* también un poco más oscuro */
+}
+
+
+/* === CARDS (INICIO ADMINISTRADOR) === */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 4px 8px rgba(0, 60, 67, 0.1);
+    text-align: center;
+    width: 280px;
+    transition: transform 0.2s ease;
+    color: #003C43;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 60, 67, 0.2);
+}
+
+.card img {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 1px rgba(0,0,0,0.1));
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #003C43;
+}
+
+.card h3 a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.card h3 a:hover {
+    color: #135D66;
+}
+
+.card p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #555;
+}
+
+/* === OTROS === */
+/* Ocultar elementos con clase hidden */
+.hidden {
+    display: none;
+}
+
+/* Formulario edición perfil (si aplica) */
+.form-editar {
+    max-width: 400px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 25px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 60, 67, 0.15);
+    color: #003C43;
+}
+
+.form-editar label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-editar input,
+.form-editar textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #135D66;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #E3FEF7;
+    color: #003C43;
+    resize: none;
+}
+
+.form-editar textarea {
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+.btn-editar {
+    background-color: #135D66;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto 0;
+}
+
+.btn-editar:hover {
+    background-color: #003C43;
+}
+
+/*nuevoooooooo estilos */
+.perfil-container {
+    position: relative;
+    min-height: 500px;
+    padding: 2rem;
+    color: white;
+    overflow: hidden; /* Para que no se salga nada */
+    background-color: #cce7ff; /* color azul clarito para base */
+}
+
+
+.perfil-container > section.perfil-info {
+    position: relative;
+    z-index: 1;
+}
+
+.curved-shape {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* === ESTILOS PARA LA PÁGINA DE EDICIÓN DE PERFIL === */
+.editar-admin {
+    padding: 40px 20px;
+    background-color: #E3FEF7;
+    display: flex;
+    justify-content: center;
+}
+
+.admin-container {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 60, 67, 0.15);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 30px;
+    max-width: 900px;
+    width: 100%;
+    align-items: center;
+}
+
+/* Imagen de perfil en edición */
+.imagen-editar {
+    flex: 1;
+    text-align: center;
+}
+
+.imagen-editar img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #003C43;
+    margin-bottom: 10px;
+}
+
+.imagen-editar p {
+    color: #003C43;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* Encabezado formulario */
+.form-editar h1 {
+    color: #003C43;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilo extra para mejor presentación */
+.form-editar input[type="file"] {
+    background-color: #fff;
+    border: none;
+    padding-left: 0;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>[[${title}]]</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/styleAuth.css}">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Estilos para el carrusel-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+<body class="bg-amber-800 text-white h-screen w-screen flex justify-center items-center"
+      th:style="'background-image: url('+@{/images/fondo-login.jpg}+');
+      background-size: cover; background-position: center;'">
+
+<header th:fragment="header">
+  <nav class="absolute top-0 left-0 right-0 flex justify-between items-center bg-white/10 py-4 px-20 w-screen h-[70px] backdrop-blur-lg shadow-md">
+
+    <div class="flex flex-col items-center text-white">
+      <a th:href="@{/}" class="text-2xl font-serif tracking-wide drop-shadow-md transition-all hover:text-amber-400 hover:scale-105">
+        Westin
+      </a>
+      <span class="text-lg font-serif text-gray-300 tracking-wide drop-shadow-sm">
+                Leviatan's Startup
+            </span>
+    </div>
+    <ul class="flex gap-8 text-lg font-medium items-center">
+
+
+      <li class="hover:text-gray-300 hover:underline transition-all underline-offset-4" >
+        <a th:href="@{/mentoria}">Mentoría</a>
+      </li>
+
+      <li class="hover:text-gray-300 hover:underline transition-all underline-offset-4" >
+        <a th:href="@{/convocatoria}">Convocatoria</a>
+      </li>
+
+      <li class="hover:text-gray-300 hover:underline transition-all underline-offset-4" >
+        <a th:href="@{/startups}">Startups</a>
+      </li>
+      <li class="hover:text-gray-300 hover:underline transition-all underline-offset-4" >
+        <a th:href="@{/postulaciones}">Postulaciones</a>
+      </li>
+    </ul>
+    <ul class="flex gap-6 items-center font-medium">
+      <li class="border border-white text-white px-4 py-2 rounded-lg hover:bg-white hover:text-gray-800 transition-all hover:scale-105 hover:ring-2 hover:ring-white" >
+        <a th:href="@{/register}">Sign Up</a>
+      </li>
+      <li class="border border-white bg-white text-gray-800 px-4 py-2 rounded-lg transition-all hover:bg-gray-200 hover:scale-105 hover:ring-2 hover:ring-white" >
+        <a th:href="@{/login/login}">Sign In</a>
+      </li>
+      <li class="border border-white bg-white text-gray-800 px-4 py-2 rounded-lg transition-all hover:bg-amber-500 hover:text-white hover:scale-105 hover:ring-2 hover:ring-amber-400" >
+        <form th:action="@{/logout}" method="post">
+          <a class="nav-link" onclick="this.parentNode.submit();" href="#">Log Out</a>
+        </form>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<div th:fragment="nuevo" class="absolute top-[70px] left-0 right-0 flex justify-between bg-yellow-500 py-4 px-20 w-screen h-[50px]" >
+  <ul class="w-full flex justify-end items-center">
+    <li class="flex gap-4 p-2 border border-white rounded-xl hover:bg-white hover:text-cyan-950 text-sm active:scale-105 transition-all">
+      <a th:href="@{${urlRegistro}}">Add New Record</a>
+    </li>
+  </ul>
+</div>
+
+<div th:fragment="nuevo2" class="absolute top-[70px] w-full flex justify justify-end h-[50px] px-6">
+  <a th:href="@{${urlRegistro}}" class="bg-amber-600 text-white px-4 py-2 rounded-xl text-sm hover:bg-white hover:text-amber-900 border border-amber-600 transition-all active:scale-105 font-bold">Add New Record</a>
+</div>
+
+<div th:fragment="fondo" class="absolute top-0 z-[-2] h-screen w-screen bg-stone-900">
+
+</div>
+<footer th:fragment="footer">
+  <div class="fixed bottom-0 text-center text-white left-0 right-0">
+    &copy 2025. All rights reserved for Westin Hotel & Restaurant
+  </div>
+</footer>
+</body>
+</html>

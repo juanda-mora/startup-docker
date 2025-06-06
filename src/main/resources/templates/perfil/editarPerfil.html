@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Perfil</title>
+    <link rel="stylesheet" th:href="@{/css/editarPerfil.css}">
+</head>
+<body>
+
+<!-- Header reutilizado del resto del sitio -->
+<header>
+    <a th:href="@{/home}" style="text-decoration: none; color: inherit;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+            <strong>LEVIATAN'S STARTUPS</strong>
+        </div>
+    </a>
+
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<!-- Contenedor de edición con estilo -->
+<main class="perfil-container">
+    <section class="perfil-info">
+        <h3>Editar Perfil</h3>
+
+        <!-- Vista previa de imagen -->
+        <img id="preview" th:src="${usuario.imagen}" alt="Vista previa" th:if="${usuario.imagen != null}" />
+        <p>Selecciona una imagen para actualizar tu perfil</p>
+
+        <!-- Formulario -->
+        <form class="form-editar" th:action="@{/perfil/actualizar}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" th:value="${usuario.id}" />
+
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" th:value="${usuario.nombre}" required />
+
+            <label for="correo">Correo electrónico</label>
+            <input type="email" name="correo" th:value="${usuario.correo}" required />
+
+            <label for="password">Contraseña</label>
+            <input type="password" name="password" placeholder="Nueva contraseña (opcional)" />
+
+            <label for="imagen">Imagen de perfil</label>
+            <input type="file" name="imagen" id="imagen" accept=".jpg,.jpeg,.png">
+
+            <button type="submit" class="btn-editar">Guardar cambios</button>
+        </form>
+    </section>
+</main>
+
+<!-- Script de vista previa -->
+<script>
+    const inputImagen = document.getElementById("imagen");
+    const preview = document.getElementById("preview");
+
+    inputImagen.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "#";
+            preview.style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>

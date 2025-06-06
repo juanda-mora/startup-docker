@@ -1,0 +1,199 @@
+/* === RESET === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* === BODY === */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #77B0AA;
+    color: #003C43;
+    line-height: 1.5;
+}
+
+/* === HEADER Y NAVEGACIÓN === */
+header {
+    background-color: #003C43;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo en header */
+header a div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header a div img {
+    width: 35px;
+    height: 35px;
+}
+
+
+
+/* Navegación */
+nav {
+    background: #003C43; /* mismo que header para consistencia */
+    color: white;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Links navegación */
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+    color: #77B0AA; /* color claro de la paleta */
+    transform: scale(1.1);
+}
+
+/* Botón cerrar sesión */
+.logout-btn {
+    background-color: white;
+    color: #003C43;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 2px solid #003C43;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #f87171; /* rojo para alerta */
+    color: white;
+}
+
+
+/* === CONTENEDOR PRINCIPAL === */
+.crear-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: #f7fdfa;
+    min-height: calc(100vh - 70px);
+}
+
+.crear-info {
+    background-color: #ffffff;
+    border: 2px solid #135D66;
+    border-radius: 15px;
+    padding: 35px 40px;
+    box-shadow: 0 4px 15px rgba(19, 93, 102, 0.15);
+    width: 100%;
+    max-width: 550px;
+    text-align: center;
+}
+
+.crear-info h3 {
+    font-size: 28px;
+    color: #003C43;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.crear-info img#preview {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3.5px solid #135D66;
+    display: block;
+    margin: 0 auto 18px auto;
+}
+
+.crear-info p {
+    font-size: 15px;
+    color: #4f5d5f;
+    margin-bottom: 28px;
+}
+
+.form-crear {
+    text-align: left;
+}
+
+.form-crear label {
+    display: block;
+    font-weight: 600;
+    color: #003C43;
+    margin-bottom: 8px;
+    font-size: 16px;
+    user-select: none;
+}
+
+.form-crear input[type="text"],
+.form-crear input[type="email"],
+.form-crear input[type="date"],
+.form-crear textarea,
+.form-crear select,
+.form-crear input[type="file"] {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 10px;
+    border: 2px solid #135D66;
+    background-color: #e3fef7;
+    color: #003C43;
+    font-size: 16px;
+    margin-bottom: 22px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-crear textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.form-crear input[type="checkbox"] {
+    margin-bottom: 22px;
+    transform: scale(1.2);
+}
+
+/* Estilo para file input */
+.form-crear input[type="file"] {
+    background-color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border-color: #ccc;
+}
+
+.form-crear input:focus,
+.form-crear textarea:focus,
+.form-crear select:focus,
+.form-crear input[type="file"]:focus {
+    border-color: #003C43;
+    outline: none;
+}
+
+.btn-editar {
+    display: block;
+    width: 100%;
+    background-color: #135D66;
+    color: #ffffff;
+    padding: 14px 0;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    user-select: none;
+}
+
+.btn-editar:hover {
+    background-color: #003C43;
+}

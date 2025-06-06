@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Sesión</title>
+    <link rel="stylesheet" th:href="@{/css/crear.css}">
+</head>
+<body>
+
+<header>
+    <a th:href="@{/home}" style="text-decoration: none; color: inherit;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+            <strong>LEVIATAN'S STARTUPS</strong>
+        </div>
+    </a>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<main class="crear-container">
+    <section class="crear-info">
+        <h3>Crear Sesión</h3>
+
+        <img id="preview" src="#" alt="Vista previa" style="display: none;" />
+        <p>Selecciona una imagen para la sesión (opcional)</p>
+
+        <form class="form-crear"
+              th:action="@{/crearSesion}"
+              th:object="${sesion}"
+              method="post"
+              enctype="multipart/form-data">
+
+            <label for="titulo">Título</label>
+            <input type="text" th:field="*{titulo}" required>
+
+            <label for="notas">Notas</label>
+            <textarea th:field="*{notas}" required></textarea>
+
+            <label for="usuarioId">Usuario</label>
+            <select name="usuarioId" id="usuarioId" required>
+                <option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nombre}"></option>
+            </select>
+
+            <label for="startupId">Startup</label>
+            <select name="startupId" id="startupId" required>
+                <option th:each="s : ${startups}" th:value="${s.id}" th:text="${s.nombre}"></option>
+            </select>
+
+            <label for="reservada">¿Reservada?</label>
+            <input type="checkbox" th:field="*{reservada}" />
+
+            <label for="imagenFile">Imagen (opcional)</label>
+            <input type="file" id="imagenFile" name="imagenFile" accept="image/*" />
+
+            <button type="submit" class="btn-editar">Crear Sesión</button>
+        </form>
+    </section>
+</main>
+
+<script>
+    const inputImagen = document.getElementById("imagenFile");
+    const preview = document.getElementById("preview");
+
+    inputImagen.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "#";
+            preview.style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>

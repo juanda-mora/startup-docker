@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Sesión</title>
+    <link rel="stylesheet" th:href="@{/css/mentor.css}">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="logo">LEVIATAN'S STARTUPS</div>
+    <ul>
+        <a th:href="@{/mentor}">Home</a>
+        <a th:href="@{/mentoria/mentor/sesiones}">Sesiones</a>
+        <a th:href="@{/mentor/convocatorias}">Ver Convocatorias</a>
+    </ul>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="logout-button">Cerrar Sesión</button>
+    </form>
+</nav>
+
+<!-- HEADER -->
+<header class="welcome">
+
+</header>
+
+<!-- MAIN -->
+<main class="perfil-container">
+    <section class="perfil-info">
+        <img th:src="@{${sesion.imagen}}" alt="Imagen Sesión" style="max-width: 200px; border-radius: 50%;">
+        <h2 th:text="'Detalles de: ' + ${sesion.titulo}">Detalle Sesión</h2>
+        <p><strong>Notas:</strong> <span th:text="${sesion.notas}">Notas</span></p>
+        <p><strong>Fecha:</strong>
+            <span th:text="${#temporals.format(sesion.fechaHora, 'dd/MM/yyyy HH:mm')}"></span>
+        </p>
+        <p><strong>Mentor:</strong>
+            <span th:text="${usuario.nombre}">Nombre del Mentor</span>
+        </p>
+        <p><strong>Startup:</strong>
+            <span th:text="${sesion.startup.nombre}">Nombre de la Startup</span>
+        </p>
+        <p><strong>Sector:</strong>
+            <span th:text="${sesion.startup.sector}">Sector</span>
+        </p>
+        <p><strong>Descripción Startup:</strong>
+            <span th:text="${sesion.startup.descripcion}">Descripción</span>
+        </p>
+        <p><strong>Reservada:</strong>
+            <span th:text="${sesion.reservada ? 'Sí' : 'No'}">Estado</span>
+        </p>
+    </section>
+
+    <!-- CONTENIDO LATERAL CON TABS -->
+    <section class="contenido-lateral" style="margin-top: 3rem;">
+
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab active" onclick="mostrarTab('sesiones')">Sesiones</button>
+            <button class="tab" onclick="mostrarTab('convocatorias')">Convocatorias</button>
+        </div>
+
+        <!-- SESIONES -->
+        <div id="sesiones" class="contenido-sesiones">
+            <div th:if="${#lists.isEmpty(sesiones)}">
+                <p>No hay sesiones disponibles.</p>
+            </div>
+            <div th:each="sesionItem : ${sesiones}" class="card-sesion">
+                <img th:src="@{${sesionItem.imagen}}" alt="Imagen Sesión"/>
+                <div>
+                    <strong th:text="${sesionItem.titulo}">Título de Sesión</strong>
+                    <p>Fecha: <span th:text="${#temporals.format(sesionItem.fechaHora, 'dd/MM/yyyy HH:mm')}">fecha</span></p>
+                    <a th:href="@{'/mentoria/sesion/' + ${sesionItem.id}}">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONVOCATORIAS -->
+        <div id="convocatorias" class="contenido-convocatorias" style="display: none;">
+            <div th:if="${#lists.isEmpty(convocatorias)}">
+                <p>No hay convocatorias disponibles.</p>
+            </div>
+            <div th:each="convocatoria : ${convocatorias}" class="card-convocatoria">
+                <img th:src="@{'/images/' + ${convocatoria.imagen}}" alt="Imagen convocatoria"
+                     style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"/>
+
+                <div>
+                    <strong th:text="${convocatoria.titulo}">Título de convocatoria</strong>
+                    <span th:text="${#dates.format(convocatoria.fechaInicio, 'dd/MM/yyyy')}">fecha</span>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main>
+
+<!-- JAVASCRIPT PARA TABS -->
+<script>
+    function mostrarTab(tab) {
+        document.getElementById("sesiones").style.display = "none";
+        document.getElementById("convocatorias").style.display = "none";
+        document.getElementById(tab).style.display = "block";
+
+        const botones = document.querySelectorAll(".tabs .tab");
+        botones.forEach(btn => btn.classList.remove("active"));
+        if (tab === "sesiones") {
+            botones[0].classList.add("active");
+        } else {
+            botones[1].classList.add("active");
+        }
+    }
+
+    window.onload = function() {
+        mostrarTab('sesiones');
+    }
+</script>
+
+</body>
+</html>

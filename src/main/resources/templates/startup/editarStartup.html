@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Startup</title>
+    <link rel="stylesheet" th:href="@{/css/editar.css}">
+</head>
+<body>
+
+<header>
+    <a th:href="@{/administrador}" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+            <strong>LEVIATAN'S STARTUPS</strong>
+        </div>
+    </a>
+
+    <nav>
+        <a th:href="@{/administrador}">Home</a>
+        <a th:href="@{/admin/perfil}">Perfil</a>
+        <a th:href="@{/sesion}">Sesiones</a>
+        <a th:href="@{/administrador/convocatoria}">Convocatorias</a>
+        <a th:href="@{/startup}">Startups</a>
+        <a th:href="@{/postulacion}">Postulaciones</a>
+    </nav>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<div class="crear-container">
+    <div class="crear-info">
+        <h3>Editar Startup</h3>
+
+        <img id="preview" th:src="${startup.logoUrl}" alt="Logo actual" />
+
+        <p>Selecciona una nueva imagen si deseas cambiar el logo</p>
+
+        <form class="form-crear"
+              th:action="@{/editarStartup/{id}(id=${startup.id})}"
+              th:object="${startup}"
+              method="post"
+              enctype="multipart/form-data">
+
+            <input type="hidden" name="logoActual" th:value="${startup.logoUrl}" />
+
+            <label for="nombre">Nombre</label>
+            <input type="text" th:field="*{nombre}" id="nombre" required />
+
+            <label for="descripcion">Descripción</label>
+            <textarea th:field="*{descripcion}" id="descripcion"></textarea>
+
+            <label for="sector">Sector</label>
+            <input type="text" th:field="*{sector}" id="sector" />
+
+            <label for="usuario">Usuario Responsable</label>
+            <select th:field="*{usuario}" id="usuario" required>
+                <option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nombre}"></option>
+            </select>
+
+            <label for="logoFile">Nuevo logo (opcional)</label>
+            <input type="file" id="logoFile" name="logoFile" accept="image/*" />
+
+            <button type="submit" class="btn-editar">Guardar cambios</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const inputLogo = document.getElementById("logoFile");
+    const preview = document.getElementById("preview");
+
+    inputLogo.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
+</body>
+</html>

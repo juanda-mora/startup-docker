@@ -1,0 +1,255 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* === HEADER Y NAVEGACIÓN === */
+header {
+    background-color: #003C43;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo en header */
+header a div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header a div img {
+    width: 35px;
+    height: 35px;
+}
+
+
+
+/* Navegación */
+nav {
+    background: #003C43; /* mismo que header para consistencia */
+    color: white;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Links navegación */
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+    color: #77B0AA; /* color claro de la paleta */
+    transform: scale(1.1);
+}
+
+/* Botón cerrar sesión */
+.logout-btn {
+    background-color: white;
+    color: #003C43;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 2px solid #003C43;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #f87171; /* rojo para alerta */
+    color: white;
+}
+
+
+.banner-convocatoria {
+    text-align: center;
+    background-color: #003C3C;
+    padding: 40px 20px;
+    position: relative;
+}
+
+.banner-convocatoria h1 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.banner-convocatoria p {
+    color: #e0f7f6;
+    font-size: 16px;
+}
+
+.btn-crear {
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+    background-color: #ffffff;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-crear:hover {
+    background-color: #e0f7f6;
+}
+
+.convocatorias, .otros-servicios {
+    padding: 30px;
+    text-align: center;
+}
+
+.panel-convocatoria, .panel-servicios {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.card-convocatoria {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.card-convocatoria img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.botones-convocatoria {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.botones-convocatoria .editar,
+.botones-convocatoria .eliminar,
+.servicio .editar {
+    padding: 8px 14px;
+    background-color: #004d4d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.botones-convocatoria .eliminar {
+    background-color: #a22c29;
+}
+
+.botones-convocatoria .editar:hover,
+.servicio .editar:hover {
+    background-color: #006666;
+}
+
+.botones-convocatoria .eliminar:hover {
+    background-color: #8e1c1c;
+}
+
+.servicio {
+    background-color: #e6fffe;
+    border-radius: 12px;
+    padding: 20px;
+    width: 280px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+.card-convocatoria img {
+    display: block;
+    margin: 0 auto 15px auto;
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* nuevo para los cuadros */
+.card-convocatoria {
+    background: #ffffff;
+    padding: 25px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    transition: transform 0.3s ease;
+}
+
+.card-convocatoria:hover {
+    transform: translateY(-5px);
+}
+
+.titulo-sesion {
+    color: #003C43;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0f7f6;
+    padding-bottom: 10px;
+}
+
+.info-sesion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.info-item {
+    display: grid;
+    grid-template-columns: 20px auto 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-item i {
+    color: #007B7F;
+    font-size: 16px;
+}
+
+.label {
+    font-weight: bold;
+    color: #003C43;
+}
+
+.value {
+    text-align: left;
+    color: #333;
+    word-break: break-word;
+}
+
+.img-sesion {
+    width: 100%;
+    height: auto;             /* ← deja que crezca naturalmente */
+    object-fit: contain;      /* ← asegura que no se recorte */
+    border-radius: 10px;
+    display: block;
+    max-height: 250px;        /* ← opcional: para no hacer tarjetas gigantes si hay imágenes muy grandes */
+    background-color: #f0f0f0; /* opcional: se nota si sobra espacio */
+}
+
+
+
+
+
+

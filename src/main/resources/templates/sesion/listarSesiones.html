@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sesiones de Mentoría</title>
+    <link rel="stylesheet" th:href="@{/css/listar.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <a th:href="@{/administrador}" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+            <strong>LEVIATAN'S STARTUPS</strong>
+        </div>
+    </a>
+
+    <nav>
+        <a th:href="@{/home}" style="text-decoration: none; color: inherit;">
+    </nav>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+<section class="banner-convocatoria">
+    <h1>¡Bienvenido al apartado de Sesiones de Mentoría!</h1>
+    <p>Nuestras sesiones de mentoría son tu brújula para emprender con claridad, coraje y dirección.</p>
+    <a class="btn-crear" th:href="@{/crearSesion}">Crear nueva</a>
+</section>
+
+<!-- Bloque para mostrar mensajes de éxito o error -->
+<div th:if="${success}" class="alert alert-success" style="margin: 1rem; color: green; font-weight: bold;">
+    <p th:text="${success}"></p>
+</div>
+
+<div th:if="${error}" class="alert alert-danger" style="margin: 1rem; color: red; font-weight: bold;">
+    <p th:text="${error}"></p>
+</div>
+
+<section class="convocatorias">
+
+    <h2>Sesiones de Mentoría:</h2>
+    <div class="panel-convocatoria">
+        <div class="card-convocatoria" th:each="s : ${sesiones}">
+            <h3 th:text="${s.titulo}" class="titulo-sesion">Título de la sesión</h3>
+
+            <div class="info-sesion">
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="label">Fecha:</div>
+                    <div class="value" th:text="${#dates.format(s.fechaHora, 'yyyy-MM-dd HH:mm')}">Sin fecha</div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="label">Reservada:</div>
+                    <div class="value" th:text="${s.reservada ? 'Sí' : 'No'}"></div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-user"></i>
+                    <div class="label">Usuario:</div>
+                    <div class="value" th:text="${s.usuario.nombre}">Sin usuario</div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-building"></i>
+                    <div class="label">Startup:</div>
+                    <div class="value" th:text="${s.startup.nombre}">Sin startup</div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-sticky-note"></i>
+                    <div class="label">Notas:</div>
+                    <div class="value" th:text="${s.notas}">Sin notas</div>
+                </div>
+            </div>
+
+
+            <div th:if="${s.imagen != null}">
+                <img th:src="${s.imagen}" alt="Imagen Sesión" class="img-sesion"/>
+            </div>
+
+            <div class="botones-convocatoria">
+                <a th:href="@{/editarSesion/{id}(id=${s.id})}">
+                    <button class="editar">Editar</button>
+                </a>
+                <form th:action="@{/eliminarSesion/{id}(id=${s.id})}" method="post">
+                    <button class="eliminar" type="submit"
+                            onclick="return confirm('¿Estás seguro de eliminar esta sesión?');">
+                        Eliminar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${convocatoria.titulo}">Detalles de la Convocatoria</title>
+    <link rel="stylesheet" th:href="@{/css/mentor.css}">
+</head>
+<body>
+
+<header>
+    <a th:href="@{/mentor}" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+            <strong>LEVIATAN'S STARTUPS</strong>
+        </div>
+    </a>
+    <nav>
+        <a th:href="@{/mentor/perfil}">Perfil</a>
+        <a th:href="@{/mentoria/mentor/sesiones}">Sesiones</a>
+        <a th:href="@{/mentor/convocatorias}">Convocatorias</a>
+    </nav>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<main class="detalle-container">
+
+    <!-- INFORMACIÓN DE LA CONVOCATORIA -->
+    <section class="detalle-info">
+        <div class="detalle-card">
+            <img th:src="${convocatoria.imagen}" alt="Imagen convocatoria" class="detalle-imagen">
+            <div class="detalle-datos">
+                <h2 th:text="${convocatoria.titulo}">Título</h2>
+                <p>Fecha inicio:
+                    <span th:if="${convocatoria.fechaInicio != null}"
+                          th:text="${#dates.format(convocatoria.fechaInicio, 'dd/MM/yyyy')}">fecha</span>
+                    <span th:if="${convocatoria.fechaInicio == null}">Sin fecha</span>
+                </p>
+                <p>Fecha fin:
+                    <span th:if="${convocatoria.fechaFin != null}"
+                          th:text="${#dates.format(convocatoria.fechaFin, 'dd/MM/yyyy')}">fecha</span>
+                    <span th:if="${convocatoria.fechaFin == null}">Sin fecha</span>
+                </p>
+                <p><strong>Descripción:</strong></p>
+                <p th:text="${convocatoria.descripcion}">Texto descriptivo</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PANEL LATERAL: TABS -->
+    <section class="panel-lateral">
+        <div class="tabs">
+            <button class="tab active" onclick="mostrarTab('sesiones')">Sesiones</button>
+            <button class="tab" onclick="mostrarTab('convocatorias')">Convocatorias</button>
+        </div>
+
+        <!-- SESIONES -->
+        <div id="sesiones" class="contenido-tab">
+            <div th:each="sesionItem : ${sesiones}" class="card-sesion">
+                <img th:src="@{${sesionItem.imagen}}" alt="Imagen Sesión"/>
+                <div>
+                    <strong th:text="${sesionItem.titulo}">Título de Sesión</strong>
+                    <p>Fecha:
+                        <span th:if="${sesionItem.fechaHora != null}"
+                              th:text="${#dates.format(sesionItem.fechaHora, 'dd/MM/yyyy HH:mm')}">fecha</span>
+                        <span th:if="${sesionItem.fechaHora == null}">Sin fecha</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONVOCATORIAS -->
+        <div id="convocatorias" class="contenido-tab" style="display: none;">
+            <div th:each="conv : ${convocatorias}" class="card-convocatoria">
+                <img th:src="${conv.imagen}" alt="Imagen convocatoria">
+                <div>
+                    <strong th:text="${conv.titulo}">Título</strong>
+                    <p>Fecha:
+                        <span th:if="${conv.fechaInicio != null}"
+                              th:text="${#dates.format(conv.fechaInicio, 'dd/MM/yyyy')}">fecha</span>
+                        <span th:if="${conv.fechaInicio == null}">Sin fecha</span>
+                    </p>
+                    <a th:href="@{'/convocatoria/ver/' + ${conv.id}}">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    function mostrarTab(tabId) {
+        const tabs = document.querySelectorAll('.contenido-tab');
+        const buttons = document.querySelectorAll('.tab');
+
+        tabs.forEach(tab => tab.style.display = 'none');
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        document.getElementById(tabId).style.display = 'block';
+        document.querySelector(`.tab[onclick*="${tabId}"]`).classList.add('active');
+    }
+</script>
+
+</body>
+</html>

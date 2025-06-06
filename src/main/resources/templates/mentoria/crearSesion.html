@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Sesión</title>
+    <link th:href="@{/css/formularioSesion.css}" rel="stylesheet">
+</head>
+<body>
+
+<h2>Crear Nueva Sesión de Mentoría</h2>
+<form th:action="@{/mentoria/guardar-sesion}"
+      th:object="${sesionMentoria}"
+      method="post"
+      enctype="multipart/form-data">
+
+    <label>Título:</label>
+    <input type="text" th:field="*{titulo}" required>
+
+    <label>Fecha y Hora:</label>
+    <input type="datetime-local" th:field="*{fechaHora}" required>
+
+    <label>Notas:</label>
+    <textarea th:field="*{notas}"></textarea>
+
+    <label>Imagen:</label>
+    <input type="file" name="imagenFile" accept="image/*" required>
+
+    <label>Reservada:</label>
+    <input type="checkbox" th:field="*{reservada}">
+
+    <label>Startup ID:</label>
+    <input type="number" th:field="*{startup.id}" placeholder="ID de la startup" required>
+
+    <button type="submit">Guardar sesión</button>
+</form>
+
+
+<a th:href="@{/mentor}">Cancelar</a>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Startup</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #1e4c4f;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 40px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background-color: white;
+            color: #1e4c4f;
+            border: 1px solid #1e4c4f;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 40px;
+        }
+
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-section h2 {
+            margin: 0;
+        }
+
+        .register-btn {
+            background-color: #7fb2af;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .startup-info {
+            display: flex;
+            margin-top: 30px;
+            gap: 40px;
+        }
+
+        .startup-info img {
+            width: 180px;
+            height: 180px;
+            border-radius: 10px;
+            object-fit: cover;
+            background-color: #e2e2e2;
+        }
+
+        .info-fields {
+            flex: 1;
+        }
+
+        .field-group {
+            margin-bottom: 20px;
+        }
+
+        .field-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .field-group .field {
+            background-color: #a8c5c3;
+            padding: 10px;
+            border-radius: 10px;
+            min-height: 30px;
+        }
+
+        .field.large {
+            min-height: 80px;
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .buttons a {
+            background-color: #1e4c4f;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div><strong>LEVIATAN'S STARTUPS</strong></div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/mentoria">Mentorías</a>
+        <a href="/convocatoria">Convocatorias</a>
+        <a href="/startups">Startup</a>
+        <a href="/postulaciones">Postulación</a>
+    </nav>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<div class="container">
+    <div class="header-section">
+        <h2>Startup:</h2>
+        <a href="/startups/crear" class="register-btn">Registrar Startup</a>
+    </div>
+
+    <div class="startup-info">
+        <img th:src="${startup.logoUrl}" alt="Logo Startup">
+        <div class="info-fields">
+            <div class="field-group">
+                <label>Nombre:</label>
+                <div class="field" th:text="${startup.nombre}">Nombre Startup</div>
+            </div>
+            <div class="field-group">
+                <label>Sector:</label>
+                <div class="field" th:text="${startup.sector}">Tecnología</div>
+            </div>
+            <div class="field-group">
+                <label>Descripción:</label>
+                <div class="field large" th:text="${startup.descripcion}">Descripción de la startup...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <a th:href="@{/startups/editar/{id}(id=${startup.id})}">Editar</a>
+        <a th:href="@{/startups/eliminar/{id}(id=${startup.id})}">Eliminar</a>
+    </div>
+</div>
+
+</body>
+</html>

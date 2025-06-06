@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Convocatorias</title>
+  <link rel="stylesheet" th:href="@{/css/listar.css}">
+</head>
+<body>
+<header class="header-convocatoria">
+  <div class="logo">
+    <img src="/images/logo.png" alt="Logo">
+    <span>LEVIATAN'S STARTUPS</span>
+  </div>
+  <nav class="nav-links">
+    <a href="/indexEmprendedor">Home</a>
+<!--    <a th:href="@{/admin/perfil}">Perfil</a>-->
+    <a th:href="@{/emprendedor/crearStartup}">Startup</a>
+    <a th:href="@{/emprendedor/crearPostulacion}">Postulación</a>
+  </nav>
+  <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<section class="banner-convocatoria">
+  <h1>¡Bienvenido al apartado de Convocatoria!</h1>
+  <p>Estás ayudando a construir el futuro, una convocatoria a la vez.</p>
+</section>
+<section class="convocatorias">
+  <h2>CONVOCATORIAS</h2>
+  <div class="panel-convocatoria">
+    <div class="card-convocatoria" th:each="conv : ${convocatorias}">
+      <img th:src="@{${conv.imagen}}" alt="Imagen" width="150" height="150" />
+      <h3 th:text="${conv.titulo}">Título</h3>
+      <p><strong>INICIO:</strong>
+        <span th:text="${#dates.format(conv.fechaInicio, 'yyyy-MM-dd')}">Fecha Inicio</span>
+      </p>
+      <p><strong>FIN:</strong>
+        <span th:text="${#dates.format(conv.fechaFin, 'yyyy-MM-dd')}">Fecha Fin</span>
+      </p>
+      <p th:text="${conv.descripcion}">Descripción...</p>
+    </div>
+  </div>
+</section>
+</body>
+</html>

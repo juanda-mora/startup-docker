@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${title}">Crear Convocatoria</title>
+  <link rel="stylesheet" th:href="@{/css/crear.css}">
+</head>
+<body>
+
+<!-- Header coherente -->
+<header>
+  <a th:href="@{/home}" style="text-decoration: none; color: inherit;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+      <strong>LEVIATAN'S STARTUPS</strong>
+    </div>
+  </a>
+  <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<!-- Contenedor principal -->
+<main class="crear-container">
+  <section class="crear-info">
+    <h3>Crear Convocatoria</h3>
+
+    <!-- Vista previa de la imagen -->
+    <img id="preview" src="#" alt="Vista previa" style="display: none;" />
+    <p>Selecciona una imagen para la convocatoria</p>
+
+    <!-- Formulario -->
+    <form class="form-crear"
+          th:action="@{/crearConvocatoria}"
+          th:object="${convocatoria}"
+          method="post"
+          enctype="multipart/form-data"
+          id="formCrearConvocatoria">
+
+      <label for="titulo">Título</label>
+      <input type="text" id="titulo" th:field="*{titulo}" placeholder="Título" required />
+
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" th:field="*{descripcion}" placeholder="Descripción"></textarea>
+
+      <label for="fechaInicioStr">Fecha de inicio</label>
+      <input type="date" id="fechaInicioStr" name="fechaInicioStr" required />
+
+      <label for="fechaFinStr">Fecha de fin</label>
+      <input type="date" id="fechaFinStr" name="fechaFinStr" required />
+
+      <!-- Mensaje de error -->
+      <div id="mensajeError" class="error-msg"></div>
+
+      <label for="imagenFile">Imagen de la convocatoria</label>
+      <input type="file" id="imagenFile" name="imagenFile" accept="image/*" required />
+
+      <button type="submit" class="btn-editar">Crear convocatoria</button>
+    </form>
+  </section>
+</main>
+
+<!-- Scripts -->
+<script>
+  const inputImagen = document.getElementById("imagenFile");
+  const preview = document.getElementById("preview");
+
+  inputImagen.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+        preview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "#";
+      preview.style.display = "none";
+    }
+  });
+
+  const formCrear = document.getElementById('formCrearConvocatoria');
+  const fechaInicioCrear = document.getElementById('fechaInicioStr');
+  const fechaFinCrear = document.getElementById('fechaFinStr');
+  const mensajeErrorCrear = document.getElementById('mensajeError');
+
+  formCrear.addEventListener('submit', function(event) {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    const inicio = new Date(fechaInicioCrear.value);
+    const fin = new Date(fechaFinCrear.value);
+
+    if (inicio < hoy) {
+      event.preventDefault();
+      mensajeErrorCrear.textContent = "La fecha de inicio debe ser una fecha futura.";
+      fechaInicioCrear.focus();
+      return;
+    }
+
+    if (fin < inicio) {
+      event.preventDefault();
+      mensajeErrorCrear.textContent = "No puedes escoger una fecha de fin anterior a la fecha de inicio.";
+      fechaFinCrear.focus();
+      return;
+    }
+
+    mensajeErrorCrear.textContent = "";
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sesiones del Mentor</title>
+    <link rel="stylesheet" th:href="@{/css/convocatoriaMentor.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <a th:href="@{/mentor}" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+            <strong>LEVIATAN'S STARTUPS</strong>
+        </div>
+    </a>
+    <nav>
+        <a th:href="@{/mentor/perfil}">Perfil</a>
+        <a th:href="@{/mentoria/mentor/sesiones}">Sesiones</a>
+        <a th:href="@{/mentor/convocatorias}">Convocatorias</a>
+    </nav>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<section class="banner-convocatoria">
+    <h1>¡Bienvenido al apartado de Sesiones!</h1>
+    <p>Nuestras sesiones de mentoría son tu brújula para emprender con claridad, coraje y dirección.</p>
+</section>
+
+<main class="convocatorias">
+    <div class="panel-convocatoria">
+
+        <div th:if="${#lists.isEmpty(sesiones)}">
+            <p>No tienes sesiones registradas.</p>
+        </div>
+
+        <div th:each="sesion : ${sesiones}" class="card-convocatoria">
+            <h3 th:text="${sesion.titulo}" class="titulo-sesion">Título</h3>
+
+            <div class="info-sesion">
+                <div class="info-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="label">Fecha:</div>
+                    <div class="value" th:text="${#dates.format(sesion.fechaHora, 'dd/MM/yyyy HH:mm')}">Fecha</div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-sticky-note"></i>
+                    <div class="label">Notas:</div>
+                    <div class="value" th:text="${sesion.notas}">Notas</div>
+                </div>
+            </div>
+
+            <div th:if="${sesion.imagen != null}">
+                <img th:src="@{${sesion.imagen}}" alt="Imagen Sesión" class="img-sesion">
+            </div>
+        </div>
+
+    </div>
+</main>
+
+</body>
+</html>

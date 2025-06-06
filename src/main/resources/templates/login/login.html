@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" th:href="@{/css/styleAuth.css}">
+</head>
+<body class="auth-body">
+<!-- Logo arriba a la izquierda -->
+<a th:href="@{/}" style="text-decoration: none;">
+    <div class="logo-container">
+        <img src="/images/logo.png" alt="Leviatan's Startups Logo">
+        <div class="logo-text">
+            <strong>LEVIATAN’S</strong><br>startups
+        </div>
+    </div>
+</a>
+<a href="/registro" class="login-btn login-fixed">Registrarse</a>
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Iniciar Sesión</h2>
+        <form th:action="@{/login}" method="post" th:object="${usuario}">
+            <label>Correo Electrónico:</label>
+            <input type="email" th:field="*{correo}" required><br>
+
+            <label>Contraseña:</label>
+            <input type="password" th:field="*{password}" required><br>
+
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p>¿Aún no tienes cuenta? <a th:href="@{/registro}">Registrarse</a></p>
+        <div th:if="${error}" class="error" th:text="${error}"></div>
+    </div>
+</div>
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" th:href="@{/css/styleAuth.css}">
+</head>
+<body class="auth-body">
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Iniciar Sesión</h2>
+        <form th:action="@{/login}" method="post" th:object="${usuario}">
+            <label>Correo Electrónico:</label>
+            <input type="email" th:field="*{correo}" required><br>
+
+            <label>Contraseña:</label>
+            <input type="password" th:field="*{password}" required><br>
+
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p>¿Aún no tienes cuenta? <a th:href="@{/registro}">Registrarse</a></p>
+        <div th:if="${error}" class="error" th:text="${error}"></div>
+    </div>
+</div>
+</body>
+</html> -->
+

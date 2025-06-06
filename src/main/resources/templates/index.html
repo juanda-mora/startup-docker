@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+</head>
+<body>
+
+<header>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+        <strong>LEVIATAN'S STARTUPS</strong>
+    </div>
+    <nav>
+        <a href="/login">Mentorías</a>
+        <a href="/login">Convocatorias</a>
+        <a href="/login">Startup</a>
+        <a href="/login">Postulación</a>
+    </nav>
+    <a href="/login" class="login-btn">Iniciar Sesión</a>
+</header>
+
+<section id="banner1" class="banner banner1">
+    <button class="nav-button left disabled">&lt;</button>
+    <button class="nav-button right" onclick="mostrarBanner(2)">&gt;</button>
+    <h2>¡Impulsamos Startups que <br> Transforman el Futuro!</h2>
+    <p>¿Tienes una idea con potencial? Nosotros te ayudamos a convertirla en una realidad.</p>
+    <a href="#info-section">Conoce Más</a>
+</section>
+
+<section id="banner2" class="banner banner2" style="display: none;">
+    <button class="nav-button left" onclick="mostrarBanner(1)">&lt;</button>
+    <button class="nav-button right" onclick="mostrarBanner(3)">&gt;</button>
+    <h2>De la Idea al Impacto: Mentoreamos tu Camino al Éxito</h2>
+    <p>Te guiamos paso a paso para que tu startup crezca con estrategia,<br> enfoque y resultados reales.</p>
+    <a href="#info-section">Nuestra Labor</a>
+</section>
+
+<section id="banner3" class="banner banner3" style="display: none;">
+    <button class="nav-button left" onclick="mostrarBanner(2)">&lt;</button>
+    <button class="nav-button right disabled">&gt;</button>
+    <h2>Una Ruta Clara para Construir lo que Imaginaste</h2>
+    <p>No se trata solo de tener una gran idea, sino de llevarla a cabo con dirección. <br>Te apoyamos para que avances con estructura, planificación<br> y una visión realista del mercado al que te quieres dirigir.</p>
+    <a href="#info-section">Conoce que hay detrás</a>
+</section>
+
+<hr id="info-section">
+
+<div class="contenedor-principal">
+    <div class="menu-lateral">
+        <div class="item" data-section="quienes">
+            <i class="fas fa-users"></i>
+            <span>QUIENES SOMOS</span>
+        </div>
+        <div class="item" data-section="compania">
+            <i class="fas fa-building"></i>
+            <span>NUESTRA COMPAÑÍA</span>
+        </div>
+        <div class="item" data-section="logros">
+            <i class="fas fa-trophy"></i>
+            <span>LOGROS</span>
+        </div>
+        <div class="item" data-section="equipo">
+            <i class="fas fa-users-cog"></i>
+            <span>EQUIPO DEDICADO</span>
+        </div>
+    </div>
+
+    <div class="contenidos-dinamicos">
+        <div class="contenido" data-section="quienes">
+            <img th:src="@{/images/logo.png}" alt="logo dragon" class="logo">
+            <h2><strong>Somos un equipo apasionado por la innovación y el emprendimiento.</strong></h2>
+            <p>Acompañamos a startups desde sus primeros pasos hasta su crecimiento acelerado,
+                conectándolas con expertos, herramientas y oportunidades clave. En Leviatán Startups
+                creemos en el poder de las ideas bien ejecutadas, y trabajamos cada día para convertir
+                la visión de emprendedores audaces en realidades de alto impacto.
+            </p>
+        </div>
+        <div class="contenido" data-section="compania" style="display: none;">
+            <img th:src="@{/images/logo.png}" alt="logo dragon" class="logo">
+            <h2><strong>Una compañía construida para impulsar la transformación emprendedora.</strong></h2>
+            <p>
+                Leviatán Startups nace con la misión de ser un motor de cambio en el ecosistema de innovación.
+                Somos una compañía comprometida con el desarrollo de proyectos disruptivos que aporten valor
+                real al mercado. Nuestra estructura está diseñada para acompañar a emprendedores desde la
+                ideación hasta la consolidación, ofreciendo acceso a una red global de mentores, recursos
+                estratégicos y alianzas clave.
+            </p>
+
+        </div>
+        <div class="contenido" data-section="logros" style="display: none;">
+            <img th:src="@{/images/logo.png}" alt="logo dragon" class="logo">
+            <h2><strong>Resultados que hablan por sí solos: nuestros logros nos definen.</strong></h2>
+            <p>
+                En Leviatán Startups hemos impulsado más de 120 startups universitarios en diferentes etapas de maduración,
+                generando más de 300 empleos y movilizando inversión estratégica a través de postulaciones,
+                convocatorias y mentorías personalizadas. Nuestra red de aliados ha permitido que ideas nacidas
+                localmente trasciendan fronteras, convirtiéndose en empresas referentes en sus industrias.
+            </p>
+
+        </div>
+        <div class="contenido" data-section="equipo" style="display: none;">
+            <img th:src="@{/images/logo.png}" alt="logo dragon" class="logo">
+            <h2><strong>Personas comprometidas con hacer que las ideas cobren vida.</strong></h2>
+            <p>
+                Contamos con un equipo multidisciplinario de expertos en innovación, estrategia, desarrollo tecnológico,
+                finanzas y gestión de proyectos. En Leviatán Startups, cada miembro está orientado a brindar
+                acompañamiento personalizado, adaptado a las necesidades de cada startup. Nuestro equipo es el corazón
+                de nuestra propuesta de valor, y su dedicación es lo que garantiza que cada emprendimiento tenga el
+                respaldo necesario para alcanzar su máximo potencial.
+            </p>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const items = document.querySelectorAll(".menu-lateral .item");
+        const contenidos = document.querySelectorAll(".contenidos-dinamicos .contenido");
+
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+                const target = item.getAttribute("data-section");
+
+                // Mostrar contenido correspondiente
+                contenidos.forEach(section => {
+                    section.style.display = (section.getAttribute("data-section") === target) ? "block" : "none";
+                });
+
+                // Activar el ítem seleccionado
+                items.forEach(i => i.classList.remove("activo"));
+                item.classList.add("activo");
+            });
+        });
+    });
+</script>
+
+
+
+<script>
+    function mostrarBanner(numero) {
+        for (let i = 1; i <= 3; i++) {
+            document.getElementById("banner" + i).style.display = "none";
+        }
+        document.getElementById("banner" + numero).style.display = "block";
+    }
+
+    function mostrarInfo(seccion) {
+        const secciones = ['somos', 'mision', 'vision', 'equipo'];
+        secciones.forEach(id => {
+            document.getElementById("contenido-" + id).classList.remove("active");
+        });
+        document.getElementById("contenido-" + seccion).classList.add("active");
+    }
+</script>
+
+</body>
+</html>

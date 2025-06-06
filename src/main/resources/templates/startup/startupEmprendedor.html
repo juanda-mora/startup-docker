@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Startup</title>
+    <link rel="stylesheet" th:href="@{/css/styleAdministrador.css}">
+</head>
+<body>
+<header class="header-convocatoria">
+    <div class="logo">
+        <img src="/images/logo.png" alt="Logo">
+        <span>LEVIATAN'S STARTUPS</span>
+    </div>
+    <nav class="nav-links">
+        <a href="/indexEmprendedor">Home</a>
+        <!--        <a th:href="@{/admin/perfil}">Perfil</a>-->
+        <a th:href="@{/emprendedor/convocatoria}">Convocatorias</a>
+        <a th:href="@{/emprendedor/crearPostulacion}">Postulación</a>
+    </nav>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<div class="editar-admin">
+    <div class="admin-container">
+        <div class="imagen-editar">
+            <img id="preview" src="#" alt="Vista previa" style="display: none;" />
+            <p>Selecciona un logo para la startup</p>
+        </div>
+
+        <form class="form-editar"
+              th:action="@{/crearStartup}"
+              th:object="${startup}"
+              method="post"
+              enctype="multipart/form-data">
+            <h1>Crear Startup</h1>
+
+            <label for="nombre">Nombre</label>
+            <input type="text" th:field="*{nombre}" placeholder="Nombre" required />
+
+            <label for="descripcion">Descripción</label>
+            <textarea th:field="*{descripcion}" placeholder="Descripción..."></textarea>
+
+            <label for="sector">Sector</label>
+            <input type="text" th:field="*{sector}" placeholder="Tecnología, Salud..." />
+
+            <label for="usuario">Usuario Responsable</label>
+            <select th:field="*{usuario}" required>
+                <option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nombre}"></option>
+            </select>
+
+            <label for="logoFile">Logo (imagen)</label>
+            <input type="file" id="logoFile" name="logoFile" accept="image/*" required />
+
+            <button type="submit" class="btn-editar">Crear Startup</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const inputLogo = document.getElementById("logoFile");
+    const preview = document.getElementById("preview");
+
+    inputLogo.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "#";
+            preview.style.display = "none";
+        }
+    });
+</script>
+</body>
+</html>

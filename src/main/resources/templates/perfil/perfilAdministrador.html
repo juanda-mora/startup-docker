@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil del Administrador</title>
+    <link rel="stylesheet" th:href="@{/css/styleAdministrador.css}">
+</head>
+<body>
+
+<header>
+    <a th:href="@{/administrador}" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+            <strong>LEVIATAN'S STARTUPS</strong>
+        </div>
+    </a>
+
+    <nav>
+        <a th:href="@{/administrador}">Home</a>
+        <a th:href="@{/admin/perfil}">Perfil</a>
+        <a th:href="@{/sesion}">Sesiones</a>
+        <a th:href="@{administrador/convocatoria}">Convocatorias</a>
+        <a th:href="@{/startup}">Startups</a>
+        <a th:href="@{/postulacion}">Postulaciones</a>
+    </nav>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+<hr id="info-section">
+<header>
+    <div class="welcome">
+        <h2 th:if="${usuario != null}" th:text="'¡Bienvenido, ' + ${usuario.nombre} + '!'">¡Bienvenido!</h2>
+        <h2 th:unless="${usuario != null}">¡Bienvenido!</h2>
+        <p>Estás construyendo el motor que impulsa las ideas del mañana.</p>
+    </div>
+</header>
+
+<main class="perfil-container">
+
+    <svg class="curved-shape" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 150" preserveAspectRatio="none">
+        <path fill="#ffffff" fill-opacity="0.9" d="M0,30 C480,120 960,0 1440,90 L1440,150 L0,150 Z"></path>
+    </svg>
+
+    <section class="perfil-info">
+        <h3>MI PERFIL</h3>
+        <img th:if="${usuario.imagen != null}" th:src="${usuario.imagen}" alt="Imagen de perfil" width="150" height="150">
+        <img th:unless="${usuario.imagen != null}" th:src="@{/images/default-user.png}" alt="Imagen por defecto" width="150" height="150">
+        <h4 th:if="${usuario != null}" th:text="${usuario.nombre}">Nombre del Administrador</h4>
+        <p th:if="${usuario != null}" th:text="${usuario.correo}">correo@ejemplo.com</p>
+
+        <h4 th:unless="${usuario != null}">Nombre no disponible</h4>
+        <p th:unless="${usuario != null}">correo no disponible</p>
+
+        <small>Administrador</small><br><br>
+
+        <a th:href="@{/editarPerfil}" class="btn-editar-perfil">Administrar Perfil</a>
+    </section>
+
+
+
+</main>
+
+</body>
+</html>

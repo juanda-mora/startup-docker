@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Convocatoria</title>
+    <link rel="stylesheet" th:href="@{/css/editar.css}">
+</head>
+<body>
+
+<header>
+    <a th:href="@{/administrador}" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+            <strong>LEVIATAN'S STARTUPS</strong>
+        </div>
+    </a>
+
+    <nav>
+        <a th:href="@{/administrador}">Home</a>
+        <a th:href="@{/admin/perfil}">Perfil</a>
+        <a th:href="@{/sesion}">Sesiones</a>
+        <a th:href="@{/administrador/convocatoria}">Convocatorias</a>
+        <a th:href="@{/startup}">Startups</a>
+        <a th:href="@{/postulacion}">Postulaciones</a>
+    </nav>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<div class="crear-container">
+    <div class="crear-info">
+        <h3>Editar Convocatoria</h3>
+
+        <img id="preview" th:src="${imagenActual}" alt="Imagen actual" />
+
+        <p>Selecciona una nueva imagen si deseas reemplazarla</p>
+
+        <form class="form-crear"
+              th:action="@{/editarConvocatoria/{id}(id=${convocatoria.id})}"
+              method="post"
+              enctype="multipart/form-data"
+              id="formEditarConvocatoria">
+
+            <input type="hidden" name="id" th:value="${convocatoria.id}" />
+            <input type="hidden" name="imagenActual" th:value="${imagenActual}" />
+
+            <label for="titulo">Título</label>
+            <input type="text" name="titulo" th:value="${convocatoria.titulo}" id="titulo" required />
+
+            <label for="descripcion">Descripción</label>
+            <textarea name="descripcion" id="descripcion" required th:text="${convocatoria.descripcion}"></textarea>
+
+            <label for="fechaInicioStr">Fecha de Inicio</label>
+            <input type="date" name="fechaInicioStr" id="fechaInicioStr"
+                   th:value="${#dates.format(convocatoria.fechaInicio, 'yyyy-MM-dd')}" required />
+
+            <label for="fechaFinStr">Fecha de Fin</label>
+            <input type="date" name="fechaFinStr" id="fechaFinStr"
+                   th:value="${#dates.format(convocatoria.fechaFin, 'yyyy-MM-dd')}" required />
+
+            <!-- Mensaje de error -->
+            <div id="mensajeError" style="color: red; font-weight: bold; margin-bottom: 15px;"></div>
+
+            <label for="imagenFile">Nueva imagen (opcional)</label>
+            <input type="file" name="imagenFile" id="imagenFile" accept=".jpg,.jpeg,.png" />
+
+            <button type="submit" class="btn-editar">Guardar cambios</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const inputImagen = document.getElementById("imagenFile");
+    const preview = document.getElementById("preview");
+
+    inputImagen.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Validación fechas
+    const form = document.getElementById('formEditarConvocatoria');
+    const fechaInicio = document.getElementById('fechaInicioStr');
+    const fechaFin = document.getElementById('fechaFinStr');
+    const mensajeError = document.getElementById('mensajeError');
+
+    form.addEventListener('submit', function(event) {
+        const hoy = new Date();
+        hoy.setHours(0,0,0,0);
+
+        const inicio = new Date(fechaInicio.value);
+        const fin = new Date(fechaFin.value);
+
+        if (inicio < hoy) {
+            event.preventDefault();
+            mensajeError.textContent = "La fecha de inicio debe ser una fecha futura.";
+            fechaInicio.focus();
+            return;
+        }
+
+        if (fin < inicio) {
+            event.preventDefault();
+            mensajeError.textContent = "La fecha de fin no puede ser anterior a la de inicio.";
+            fechaFin.focus();
+            return;
+        }
+
+        mensajeError.textContent = "";
+    });
+</script>
+
+</body>
+</html>

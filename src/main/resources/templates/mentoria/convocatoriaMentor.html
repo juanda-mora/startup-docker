@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Convocatorias del Mentor</title>
+    <link rel="stylesheet" th:href="@{/css/convocatoriaMentor.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <a th:href="@{/mentor}" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+            <strong>LEVIATAN'S STARTUPS</strong>
+        </div>
+    </a>
+    <nav>
+        <a th:href="@{/mentor/perfil}">Perfil</a>
+        <a th:href="@{/mentoria/mentor/sesiones}">Sesiones</a>
+        <a th:href="@{/mentor/convocatorias}">Convocatorias</a>
+    </nav>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<section class="banner-convocatoria">
+    <h1>¡Bienvenido al apartado de Convocatoria!</h1>
+    <p>Las convocatorias de Leviatán no son solo un proceso, son el inicio de una red que te acompaña.</p>
+</section>
+
+<main class="convocatorias">
+    <div class="panel-convocatoria">
+        <a th:each="convocatoria : ${convocatorias}"
+           th:href="@{'/convocatoria/ver/' + ${convocatoria.id}}"
+           class="card-convocatoria"
+           style="text-decoration: none; color: inherit;">
+
+            <h3 th:text="${convocatoria.titulo}" class="titulo-sesion">Título</h3>
+
+            <div class="info-sesion">
+                <div class="info-item">
+                    <i class="fas fa-calendar-plus"></i>
+                    <div class="label">Inicia:</div>
+                    <div class="value">
+            <span th:if="${convocatoria.fechaInicio != null}"
+                  th:text="${#dates.format(convocatoria.fechaInicio, 'dd/MM/yyyy')}">fecha</span>
+                        <span th:if="${convocatoria.fechaInicio == null}">Sin fecha</span>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <div class="label">Finaliza:</div>
+                    <div class="value">
+            <span th:if="${convocatoria.fechaFin != null}"
+                  th:text="${#dates.format(convocatoria.fechaFin, 'dd/MM/yyyy')}">fecha</span>
+                        <span th:if="${convocatoria.fechaFin == null}">Sin fecha</span>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-align-left"></i>
+                    <div class="label">Descripción:</div>
+                    <div class="value" th:text="${convocatoria.descripcion}">Descripción...</div>
+                </div>
+            </div>
+
+            <div th:if="${convocatoria.imagen != null}">
+                <img th:src="${convocatoria.imagen}" alt="Imagen convocatoria" class="img-sesion">
+            </div>
+
+        </a>
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Postulación</title>
+    <link rel="stylesheet" th:href="@{/css/editar.css}">
+    <style>
+        #mensajeError {
+            color: red;
+            margin-top: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a th:href="@{/administrador}" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+            <strong>LEVIATAN'S STARTUPS</strong>
+        </div>
+    </a>
+
+    <nav>
+        <a th:href="@{/administrador}">Home</a>
+        <a th:href="@{/admin/perfil}">Perfil</a>
+        <a th:href="@{/sesion}">Sesiones</a>
+        <a th:href="@{/administrador/convocatoria}">Convocatorias</a>
+        <a th:href="@{/startup}">Startups</a>
+        <a th:href="@{/postulacion}">Postulaciones</a>
+    </nav>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<div class="crear-container">
+    <div class="crear-info">
+        <h3>Editar Postulación</h3>
+
+        <img id="preview" th:src="${postulacion.imagen}" alt="Imagen actual" />
+
+        <p>Selecciona una nueva imagen si deseas reemplazarla</p>
+
+        <form class="form-crear"
+              th:action="@{/editarPostulacion/{id}(id=${postulacion.id})}"
+              th:object="${postulacion}"
+              method="post"
+              enctype="multipart/form-data"
+              id="formEditarPostulacion">
+
+            <label for="nombre">Nombre</label>
+            <input type="text" th:field="*{nombre}" id="nombre" required />
+
+            <label for="email">Correo electrónico</label>
+            <input type="email" th:field="*{email}" id="email" required />
+
+            <label for="mensaje">Mensaje</label>
+            <textarea th:field="*{mensaje}" id="mensaje" required></textarea>
+
+            <label for="estado">Estado</label>
+            <select th:field="*{estado}" id="estado" required>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Aceptado">Aceptado</option>
+                <option value="Rechazado">Rechazado</option>
+            </select>
+
+            <label for="startupId">Startup</label>
+            <select name="startupId" id="startupId" required>
+                <option th:each="s : ${startups}"
+                        th:value="${s.id}"
+                        th:text="${s.nombre}"
+                        th:selected="${postulacion.startup != null and s.id == postulacion.startup.id}">
+                </option>
+            </select>
+
+            <label for="imagenFile">Nueva imagen (opcional)</label>
+            <input type="file" name="imagenFile" id="imagenFile" accept=".jpg,.jpeg,.png" />
+
+            <div id="mensajeError"></div>
+
+            <button type="submit" class="btn-editar">Guardar cambios</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const inputImagen = document.getElementById("imagenFile");
+    const preview = document.getElementById("preview");
+
+    inputImagen.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
+</body>
+</html>

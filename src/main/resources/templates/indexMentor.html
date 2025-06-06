@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio Mentor</title>
+    <link th:href="@{/css/styleMentor.css}" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+        <strong>LEVIATAN'S STARTUPS</strong>
+    </div>
+    <nav>
+        <a th:href="@{/mentor}">Home</a>
+        <!-- ✅ CORREGIDO: Ruta completa al controlador correcto -->
+        <a th:href="@{/mentoria/mentor/sesiones}">Sesiones</a>
+        <a th:href="@{/mentor/convocatorias}">Ver Convocatorias</a>
+    </nav>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<section class="banner">
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Mentoría">
+    <h2>Tu espacio como Mentor</h2>
+    <p>Gracias por guiar a las nuevas ideas hacia el éxito. Aquí puedes visualizar tus sesiones, explorar startups y apoyar convocatorias.</p>
+    <a th:href="@{/crearSesion}">Crear una sesión</a>
+</section>
+
+<section class="cards">
+    <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2922/2922561.png" alt="Perfil Mentor">
+        <h3><a th:href="@{/mentor/perfil}">Perfil</a></h3>
+        <p>Consulta tu información personal, edítala si es necesario y mantente actualizado con tu historial como mentor.</p>
+    </div>
+</section>
+
+</body>
+</html>

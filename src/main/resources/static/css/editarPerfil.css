@@ -1,0 +1,201 @@
+/* editarPerfil.css */
+
+/* === RESET === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* === BODY === */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #77B0AA;
+    color: #003C43;
+    line-height: 1.5;
+}
+
+/* === HEADER Y NAVEGACIÓN === */
+header {
+    background-color: #003C43;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header a div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header a div img {
+    width: 35px;
+    height: 35px;
+}
+
+nav {
+    background: #003C43;
+    color: white;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+    color: #77B0AA;
+    transform: scale(1.1);
+}
+
+.logout-btn {
+    background-color: white;
+    color: #003C43;
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 2px solid #003C43;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #f87171;
+    color: white;
+}
+
+/* === CONTENEDOR PRINCIPAL DE EDICIÓN === */
+.perfil-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: #f7fdfa;
+    min-height: calc(100vh - 70px);
+}
+
+/* Sección del formulario y preview */
+.perfil-info {
+    background-color: #ffffff;
+    border: 2px solid #135D66;
+    border-radius: 15px;
+    padding: 35px 40px;
+    box-shadow: 0 4px 15px rgba(19, 93, 102, 0.15);
+    width: 100%;
+    max-width: 550px;
+    text-align: center;
+}
+
+/* Título */
+.perfil-info h3 {
+    font-size: 28px;
+    color: #003C43;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* Imagen circular de perfil */
+.perfil-info img#preview {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3.5px solid #135D66;
+    display: block;
+    margin: 0 auto 18px auto;
+}
+
+/* Texto debajo de la imagen */
+.perfil-info p {
+    font-size: 15px;
+    color: #4f5d5f;
+    margin-bottom: 28px;
+}
+
+/* Formulario */
+.form-editar {
+    text-align: left;
+}
+
+/* Etiquetas */
+.form-editar label {
+    display: block;
+    font-weight: 600;
+    color: #003C43;
+    margin-bottom: 8px;
+    font-size: 16px;
+    user-select: none;
+}
+
+/* Inputs y file input */
+.form-editar input[type="text"],
+.form-editar input[type="email"],
+.form-editar input[type="password"],
+.form-editar input[type="file"] {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 10px;
+    border: 2px solid #135D66;
+    background-color: #e3fef7;
+    color: #003C43;
+    font-size: 16px;
+    margin-bottom: 22px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-editar input[type="file"] {
+    background-color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border-color: #ccc;
+}
+
+/* Borde foco inputs */
+.form-editar input[type="text"]:focus,
+.form-editar input[type="email"]:focus,
+.form-editar input[type="password"]:focus,
+.form-editar input[type="file"]:focus {
+    border-color: #003C43;
+    outline: none;
+}
+
+/* Botón guardar */
+.btn-editar {
+    display: block;
+    width: 100%;
+    background-color: #135D66;
+    color: #ffffff;
+    padding: 14px 0;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    user-select: none;
+}
+
+.btn-editar:hover {
+    background-color: #003C43;
+}
+
+/* Mensaje de error (opcional) */
+.form-editar .error-msg {
+    color: #b00020;
+    font-size: 13px;
+    margin-top: -16px;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+

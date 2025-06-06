@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Postulación</title>
+    <link rel="stylesheet" th:href="@{/css/crear.css}">
+</head>
+<body>
+
+<!-- Header similar a editarPerfil y crearSesion -->
+<header>
+    <a th:href="@{/home}" style="text-decoration: none; color: inherit;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/images/logo.png" alt="Logo" style="width: 35px; height: 35px;">
+            <strong>LEVIATAN'S STARTUPS</strong>
+        </div>
+    </a>
+    <a href="/logout" class="logout-btn">Cerrar Sesión</a>
+</header>
+
+<!-- Contenedor principal con mismas clases -->
+<main class="crear-container">
+    <section class="crear-info">
+        <h3>Crear Postulación</h3>
+
+        <!-- Imagen preview -->
+        <img id="preview" src="#" alt="Vista previa" style="display: none;" />
+        <p>Selecciona una imagen para la postulación (opcional)</p>
+
+        <!-- Formulario -->
+        <form class="form-crear"
+              th:action="@{/crearPostulacion}"
+              th:object="${postulacion}"
+              method="post"
+              enctype="multipart/form-data"
+              id="formCrearPostulacion">
+
+            <label for="nombre">Nombre</label>
+            <input type="text" th:field="*{nombre}" placeholder="Nombre" required>
+
+            <label for="email">Email</label>
+            <input type="email" th:field="*{email}" placeholder="ejemplo@correo.com" required>
+
+            <label for="mensaje">Mensaje</label>
+            <textarea th:field="*{mensaje}" placeholder="Mensaje de la postulación"></textarea>
+
+            <label for="startupId">Startup</label>
+            <select name="startupId" id="startupId" required>
+                <option th:each="s : ${startups}" th:value="${s.id}" th:text="${s.nombre}"></option>
+            </select>
+
+            <label for="convocatoriaId">Convocatoria</label>
+            <select name="convocatoriaId" id="convocatoriaId" required>
+                <option th:each="c : ${convocatorias}" th:value="${c.id}" th:text="${c.titulo}"></option>
+            </select>
+
+            <label for="imagenFile">Imagen (opcional)</label>
+            <input type="file" id="imagenFile" name="imagenFile" accept="image/*" />
+
+            <button type="submit" class="btn-editar">Crear Postulación</button>
+        </form>
+    </section>
+</main>
+
+<script>
+    const inputImagen = document.getElementById("imagenFile");
+    const preview = document.getElementById("preview");
+
+    inputImagen.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file && file.type.startsWith("image/")) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "#";
+            preview.style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil del Administrador</title>
+  <link rel="stylesheet" th:href="@{/css/mentor.css}">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">LEVIATAN'S STARTUPS</div>
+  <ul>
+    <li><a th:href="@{/mentor}">Home</a></li>
+    <li>
+      <a href="#">Mentoría</a>
+      <ul>
+        <li><a th:href="@{/mentoria}">Sesiones</a></li>
+        <li><a th:href="@{/convocatoria}">Convocatorias</a></li>
+      </ul>
+    </li>
+    <li><a th:href="@{/startup}">Startup</a></li>
+    <li><a th:href="@{/postulacion}">Postulación</a></li>
+  </ul>
+  <form th:action="@{/logout}" method="get">
+    <button type="submit">Cerrar Sesión</button>
+  </form>
+</nav>
+
+<!-- HEADER -->
+<header>
+  <div class="welcome">
+    <h2 th:text="'¡Bienvenido, ' + ${usuario.nombre} + '!'">¡Bienvenido!</h2>
+    <p>Estás ayudando a construir el futuro, una startup a la vez.</p>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="perfil-container">
+
+  <!-- PERFIL -->
+  <section class="perfil-info">
+    <h3>PERFIL</h3>
+    <img th:src="@{/images/usuario.jpg}" alt="Foto de perfil">
+    <h4 th:text="${usuario.nombre}">Nombre del Mentor</h4>
+    <p th:text="${usuario.correo}">correo@ejemplo.com</p>
+    <small>Mentor</small><br><br>
+    <button>Editar</button>
+  </section>
+
+  <!-- SESIONES -->
+  <section class="contenido-lateral">
+    <div class="tabs">
+      <button class="tab active">Sesiones</button>
+      <button class="tab">Convocatorias</button>
+    </div>
+
+    <div class="contenido-sesiones">
+      <div th:each="sesion, iterStat : ${sesiones}" class="card-sesion">
+        <img th:src="@{'/images/sesion' + ${iterStat.index + 1} + '.jpg'}" alt="Imagen Sesión"/>
+        <div>
+          <strong th:text="${sesion.titulo}">Título de Sesión</strong>
+          <p>Fecha: <span th:text="${#dates.format(sesion.fechaHora, 'dd/MM/yyyy')}">12/06/2025</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

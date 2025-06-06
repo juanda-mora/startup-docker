@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <link rel="stylesheet" th:href="@{/css/styleAuth.css}">
+</head>
+<body class="auth-body">
+<!-- Logo arriba a la izquierda -->
+<a th:href="@{/}" style="text-decoration: none;">
+    <div class="logo-container">
+        <img src="/images/logo.png" alt="Leviatan's Startups Logo">
+        <div class="logo-text">
+            <strong>LEVIATAN’S</strong><br>startups
+        </div>
+    </div>
+</a>
+<a href="/login" class="login-btn login-fixed">Iniciar Sesión</a>
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Registro</h2>
+        <form th:action="@{/registro}" method="post" th:object="${usuario}">
+
+            <div class="input-group">
+                <label>Nombre:</label>
+                <input type="text" th:field="*{nombre}" required>
+            </div>
+
+            <div class="input-group">
+                <label>Contraseña Nueva:</label>
+                <input type="password" th:field="*{password}" required>
+            </div>
+
+            <div class="input-group">
+                <label>Correo Electrónico:</label>
+                <input type="email" th:field="*{correo}" required>
+            </div>
+
+            <div class="input-group">
+                <label>Rol:</label>
+                <select th:field="*{rol.id}" required>
+                    <option value="" disabled selected>Selecciona un rol</option>
+                    <option th:each="rol : ${roles}" th:value="${rol.id}" th:text="${rol.nombre}"></option>
+                </select>
+            </div>
+
+            <button type="submit">Registrarse</button>
+        </form>
+
+        <p>¿Ya tienes cuenta? <a th:href="@{/login}">Inicia Sesión</a></p>
+        <div th:if="${error}" class="error" th:text="${error}"></div>
+        <div th:if="${mensaje}" class="mensaje" th:text="${mensaje}"></div>
+    </div>
+</div>
+</body>
+</html>
